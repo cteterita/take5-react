@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <!-- Stylesheets -->
+      <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+        rel="stylesheet"
+        type="text/css"
+      />
+      <link href="style.css" rel="stylesheet" type="text/css" />
+      <title>Take5</title>
+  </head>
+  <!---Landing Page-->
+  <body>
+    <main>
+      <header>
+        <h1>Take 5</h1>
+      </header>
+      <section id="daily-entry">
+        <h3>Take 5 minutes each day for yourself</h3>
+        <p>Set your intentions in the morning</p>
+        <p>Practice gratitude in the evening</p>
+        <button>Sign up or sign in</button>
+      </section>
+      <footer>
+        (c) 2020 Claire Teter Lesh - About - Send Feedback
+      </footer>
+    </main>
+  <!---Journal Input Page-->
+    <main>
+      <header>
+        <h1>Take 5</h1>
+      </header>
+      <section id="date-picker">
+        &larr;    Today    &rarr;
+      </section>
+      <section id="daily-entry">
+        <form class="morning-form">
+          <h3>Morning Intentions</h3>
+          <fieldset class="multiple-input">
+            3 things I'm grateful for...
+            <input type="text" />
+            <input type="text" />
+            <input type="text" />
+          </fieldset>
+          <fieldset>
+            3 things that will make today great...
+            <input type="text" />
+            <input type="text" />
+            <input type="text" />
+          </fieldset>
+          <fieldset>
+            My intention for today is...
+            <input type="text" />
+          </fieldset>
+          <button type="submit">Save</button>
+        </form>
+        <hr>
+        <form class="evening-form">
+          <h3>Evening Reflections</h3>
+          <fieldset class="multiple-input">
+            3 great things that happened today were...
+            <input type="text" />
+            <input type="text" />
+            <input type="text" />
+          </fieldset>
+          <fieldset>
+            One thing I let go of today was...
+            <input type="text" />
+          </fieldset>
+          <fieldset>
+            I am excited about tomorrow because...
+            <input type="text" />
+          </fieldset>
+          <button type="submit">Save</button>
+        </form>
+      </section>
+      <footer>
+        (c) 2020 Claire Teter Lesh - About - Send Feedback
+      </footer>
+    </main>
+
+  <!---Journal View Page-->
+    <main>
+      <header>
+        <h1>Take 5</h1>
+      </header>
+      <section id="date-picker">
+        &larr;    12/25/2019    &rarr;
+      </section>
+      <section id="daily-entry">
+        <form class="morning-form">
+          <h3>Morning Intentions</h3>
+          <fieldset class="multiple-input">
+            3 things I'm grateful for...
+            <input type="text" value="santa" disabled />
+            <input type="text" value="a cozy fireplace" disabled />
+            <input type="text" value="family" disabled />
+          </fieldset>
+          <fieldset>
+            3 things that will make today great...
+            <input type="text" value="cinnamon rolls" disabled />
+            <input type="text" value="going to a movie" disabled />
+            <input type="text" value="calling grandma" disabled />
+          </fieldset>
+          <fieldset>
+            My intention for today is...
+            <input type="text" value="to be grateful" disabled />
+          </fieldset>
+        </form>
+        <hr>
+        <form class="evening-form">
+          <h3>Evening Reflections</h3>
+          <fieldset class="multiple-input">
+            3 great things that happened today were...
+            <input type="text" value="presents" disabled />
+            <input type="text" value="my nieces loved Santa" disabled />
+            <input type="text" value="ate tons of cinnamon rolls" disabled />
+          </fieldset>
+          <fieldset>
+            One thing I let go of today was...
+            <input type="text" value="believing in santa" disabled />
+          </fieldset>
+          <fieldset>
+            I am excited about tomorrow because...
+            <input type="text" value="I get to return ugly Christmas sweaters to the mall" disabled/>
+          </fieldset>
+          <button type="submit" class="delete-button">Delete Entry from this Day</button>
+        </form>
+      </section>
+      <footer>
+        (c) 2020 Claire Teter Lesh - About - Send Feedback
+      </footer>
+    </main>
+  </body>
+</html>
