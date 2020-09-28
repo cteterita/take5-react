@@ -1,4 +1,5 @@
 import React from 'react';
+import DayView from './DayView/DayView';
 
 function App() {
   return (
@@ -6,7 +7,8 @@ function App() {
       <header>
         <h1>Take 5</h1>
       </header>
-      {/* content goes here */}
+      { /*Routes Here */ }
+      <DayView />
       <footer>
         (c) 2020 Claire Teter Lesh - About - Send Feedback
       </footer>
