@@ -1,13 +1,40 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    width: 90%;
+    max-width: 800px;
+    margin: auto;
+    background-color: #aaaaaa;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+header, footer {
+    text-align: center;
+    margin: 10px;
+    padding: 10px;
+    background-color: #dddddd;
+}
+
+#daily-entry, #date-picker {
+    margin: auto;
+    overflow: hidden;
+    margin: 10px;
+    padding: 10px;
+    font-size: 16px;
+    line-height: 20px;
+    background-color: #ffffff;
+}
+
+#date-picker {
+  text-align: center;
+}
+
+/* Form Styles */
+fieldset {
+  display: flex;
+}
+
+input {
+  width: 95%;
+}
+
+.delete-button {
+  color: red;
 }
