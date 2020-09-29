@@ -1,30 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
+import { format, zonedTimeToUtc } from 'date-fns-tz';
 
 import JournalEntry from '../JournalEntry/JournalEntry';
 import STORE from '../store';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
-function offsetDate(date) {
-  const timezoneOffset = date.getTimezoneOffset() * 60000;
-  return new Date(date - timezoneOffset);
-}
-
 function formatDate(date) {
-  const tzDate = offsetDate(date);
-  return tzDate.toISOString().split('T')[0];
+  return format(date, 'yyyy-MM-dd');
 }
 
 function DayView(props) {
   // Determine date from route
-  const { match } = props;
-  const { date } = match.params;
-  let routeDate = new Date();
-  if (date !== 'today') {
-    routeDate = new Date(date);
+  const { match, location } = props;
+  let { date } = match.params;
+  if (!date) {
+    date = formatDate(Date.now());
   }
-  routeDate = offsetDate(routeDate);
+  const routeDate = zonedTimeToUtc(date);
 
   const [shortDate, setShortDate] = useState(formatDate(routeDate));
   const [longDate, setLongDate] = useState(routeDate);
