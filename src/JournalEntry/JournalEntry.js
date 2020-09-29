@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function formatPrompts(prompts, complete) {
   return prompts.map((p) => {
@@ -56,5 +57,18 @@ function JournalEntry(props) {
     </form>
   );
 }
+
+JournalEntry.propTypes = {
+  type: PropTypes.oneOf(['morning', 'evening']).isRequired,
+  saveEntry: PropTypes.func.isRequired,
+  entryData: PropTypes.shape({
+    complete: PropTypes.bool.isRequired,
+    prompts: PropTypes.arrayOf(PropTypes.object),
+  }),
+};
+
+JournalEntry.defaultProps = {
+  entryData: null,
+};
 
 export default JournalEntry;

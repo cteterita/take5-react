@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import DatePicker from 'react-datepicker';
 import { format, zonedTimeToUtc } from 'date-fns-tz';
 
@@ -13,8 +14,8 @@ function formatDate(date) {
 
 function DayView(props) {
   // Determine date from route
-  const { match, location } = props;
-  let { date } = match.params;
+  const { match } = props;
+  let { date } = match.params; // TODO: Deal with invalid dates
   if (!date) {
     date = formatDate(Date.now());
   }
@@ -64,10 +65,13 @@ function DayView(props) {
     setEntriesComplete(0);
   };
 
+  // TODO: Wire up previous/next buttons
   return (
     <>
       <section id="date-picker">
+        <button type="submit">&larr;</button>
         <DatePicker selected={longDate} onChange={(d) => updateDate(d)} />
+        <button type="button">&rarr;</button>
       </section>
       <section id="daily-entry">
         <JournalEntry entryData={journalData.morning} type="morning" saveEntry={saveEntry} />
@@ -83,5 +87,16 @@ function DayView(props) {
     </>
   );
 }
+
+DayView.propTypes = {
+  match: PropTypes.shape({
+    params: {
+      date: PropTypes.string.isRequired,
+    }.isRequired,
+  }).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};
 
 export default DayView;
