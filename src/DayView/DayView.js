@@ -68,7 +68,7 @@ function DayView(props) {
 
   const incrementDay = (n) => {
     updateDate(addDays(longDate, n));
-  }
+  };
 
   return (
     <>
