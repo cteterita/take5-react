@@ -7,27 +7,42 @@ import STORE from '../store.js';
 import "react-datepicker/dist/react-datepicker.css";
 
 function formatDate(date) {
+  const timezoneOffset = date.getTimezoneOffset() * 60000;
+  date = new Date(date - timezoneOffset);
   return date.toISOString().split('T')[0];
 }
 
 function DayView() {
   const [startDate, setStartDate] = useState(new Date());
   const [journalData, setJournalData] = useState({});
-  const [entryStarted, setEntryStarted] = useState(false);
+  const [entriesComplete, setEntriesComplete] = useState(0);
 
   // Fetch this day's journal entries
   useEffect(() => {
+    console.log(formatDate(startDate));
     setJournalData(STORE[formatDate(startDate)] || STORE['blank']);
   }, [startDate]);
 
   // Determine if either of today's entries have already been saved
   useEffect(() => {
     if(!journalData.morning) {
-      setEntryStarted(false);
+      setEntriesComplete(0);
     } else {
-      setEntryStarted(journalData.morning.complete || journalData.evening.complete);
+      setEntriesComplete([journalData.morning.complete, journalData.evening.complete].filter(Boolean).length);
     }
   }, [journalData]);
+
+  const saveEntry = (type, prompts) => {
+    STORE[formatDate(startDate)] = STORE.blank;
+    STORE[formatDate(startDate)][type] = {
+      complete: true,
+      prompts: prompts,
+    }
+    setJournalData(STORE[formatDate(startDate)]);
+    console.log(formatDate(startDate));
+    console.log(STORE);
+    //setEntriesComplete(entriesComplete + 1);
+  };
 
   return (
     <>
@@ -35,12 +50,12 @@ function DayView() {
         <DatePicker selected={startDate} onChange={date => setStartDate(date)} />
       </section>
       <section id="daily-entry">
-        <JournalEntry entryData={journalData.morning} type='morning' />
+        <JournalEntry entryData={journalData.morning} type='morning' saveEntry={saveEntry} />
         <hr />
-        <JournalEntry entryData={journalData.evening} type='evening'/>
+        <JournalEntry entryData={journalData.evening} type='evening' saveEntry={saveEntry} />
         <hr />
         {
-          entryStarted ?
+          entriesComplete ?
           <button type="submit" className="delete-button">Delete all entries from this day</button> :
           ''
         }
