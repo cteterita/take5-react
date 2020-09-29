@@ -2,18 +2,20 @@ import React from 'react';
 
 function formatPrompts(prompts, complete) {
   return prompts.map((p) => {
+    const { promptId, prompt, responses } = p;
     return (
       <fieldset
-        id={p.promptId}
-        key={p.promptId}
+        id={promptId}
+        key={promptId}
         disabled={complete}
       >
-        {p.prompt}
-        {p.responses.map((r, i) => {
+        {prompt}
+        {responses.map((r, i) => {
+          const id = `${i}-${p.promptId}`;
           return (
             <input
-              key={`${i}-${p.promptId}`}
-              id={`${i}-${p.promptId}`}
+              key={id}
+              id={id}
               defaultValue={r}
             />
           );
@@ -24,32 +26,33 @@ function formatPrompts(prompts, complete) {
 }
 
 function JournalEntry(props) {
+  const { type, saveEntry, entryData } = props;
   const handleSubmit = (e) => {
     e.preventDefault();
     const promptFields = e.target.querySelectorAll('fieldset');
-    const newPrompts = []
-    promptFields.forEach(p => {
+    const newPrompts = [];
+    promptFields.forEach((p) => {
       const responseFields = p.querySelectorAll('input');
       const responses = [];
       responseFields.forEach((r) => responses.push(r.value));
       newPrompts.push({
         prompt: p.innerText,
         promptId: Number(p.id),
-        responses: responses,
+        responses,
       });
     });
-    props.saveEntry(props.type, newPrompts);
+    saveEntry(type, newPrompts);
     e.target.reset();
-  }
+  };
 
-  if (!props.entryData) {
+  if (!entryData) {
     return <span>Loading...</span>;
   }
   return (
-    <form id={`${props.type}-form`} onSubmit={handleSubmit} >
-      <h3>{props.type === 'morning' ? 'Morning Intentions' : 'Evening Reflections' }</h3>
-        {formatPrompts(props.entryData.prompts, props.entryData.complete)}
-      <button type="submit" disabled={props.entryData.complete}>Save</button>
+    <form id={`${type}-form`} onSubmit={handleSubmit}>
+      <h3>{type === 'morning' ? 'Morning Intentions' : 'Evening Reflections' }</h3>
+      {formatPrompts(entryData.prompts, entryData.complete)}
+      <button type="submit" disabled={entryData.complete}>Save</button>
     </form>
   );
 }

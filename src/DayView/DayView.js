@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 
 import JournalEntry from '../JournalEntry/JournalEntry';
-import STORE from '../store.js';
+import STORE from '../store';
 
-import "react-datepicker/dist/react-datepicker.css";
+import 'react-datepicker/dist/react-datepicker.css';
 
 function formatDate(date) {
   const timezoneOffset = date.getTimezoneOffset() * 60000;
@@ -19,49 +19,50 @@ function DayView() {
 
   // Fetch this day's journal entries
   useEffect(() => {
-    console.log(formatDate(startDate));
-    setJournalData(STORE[formatDate(startDate)] || STORE['blank']);
+    setJournalData(STORE[formatDate(startDate)] || STORE.blank);
   }, [startDate]);
 
   // Determine if either of today's entries have already been saved
   useEffect(() => {
-    if(!journalData.morning) {
+    if (!journalData.morning) {
       setEntriesComplete(0);
     } else {
-      setEntriesComplete([journalData.morning.complete, journalData.evening.complete].filter(Boolean).length);
+      const { morning, evening } = journalData;
+      const countComplete = [morning.complete, evening.complete].filter(Boolean).length;
+      setEntriesComplete(countComplete);
     }
   }, [journalData]);
 
   const saveEntry = (type, prompts) => {
-    STORE[formatDate(startDate)] = STORE[formatDate(startDate)] || {...STORE.blank};
+    STORE[formatDate(startDate)] = STORE[formatDate(startDate)] || { ...STORE.blank };
     STORE[formatDate(startDate)][type] = {
       complete: true,
-      prompts: prompts,
-    }
+      prompts,
+    };
     setEntriesComplete(entriesComplete + 1);
     setJournalData(STORE[formatDate(startDate)]);
   };
 
   const deleteDay = () => {
-    STORE[formatDate(startDate)] = {...STORE.blank};
+    STORE[formatDate(startDate)] = { ...STORE.blank };
     setJournalData(STORE[formatDate(startDate)]);
     setEntriesComplete(0);
-  }
+  };
 
   return (
     <>
       <section id="date-picker">
-        <DatePicker selected={startDate} onChange={date => setStartDate(date)} />
+        <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
       </section>
       <section id="daily-entry">
-        <JournalEntry entryData={journalData.morning} type='morning' saveEntry={saveEntry} />
+        <JournalEntry entryData={journalData.morning} type="morning" saveEntry={saveEntry} />
         <hr />
-        <JournalEntry entryData={journalData.evening} type='evening' saveEntry={saveEntry} />
+        <JournalEntry entryData={journalData.evening} type="evening" saveEntry={saveEntry} />
         <hr />
         {
-          entriesComplete ?
-          <button type="submit" className="delete-button" onClick={deleteDay}>Delete all entries from this day</button> :
-          ''
+          entriesComplete
+            ? <button type="submit" className="delete-button" onClick={deleteDay}>Delete all entries from this day</button>
+            : ''
         }
       </section>
     </>
