@@ -33,16 +33,20 @@ function DayView() {
   }, [journalData]);
 
   const saveEntry = (type, prompts) => {
-    STORE[formatDate(startDate)] = STORE.blank;
+    STORE[formatDate(startDate)] = STORE[formatDate(startDate)] || {...STORE.blank};
     STORE[formatDate(startDate)][type] = {
       complete: true,
       prompts: prompts,
     }
+    setEntriesComplete(entriesComplete + 1);
     setJournalData(STORE[formatDate(startDate)]);
-    console.log(formatDate(startDate));
-    console.log(STORE);
-    //setEntriesComplete(entriesComplete + 1);
   };
+
+  const deleteDay = () => {
+    STORE[formatDate(startDate)] = {...STORE.blank};
+    setJournalData(STORE[formatDate(startDate)]);
+    setEntriesComplete(0);
+  }
 
   return (
     <>
@@ -56,7 +60,7 @@ function DayView() {
         <hr />
         {
           entriesComplete ?
-          <button type="submit" className="delete-button">Delete all entries from this day</button> :
+          <button type="submit" className="delete-button" onClick={deleteDay}>Delete all entries from this day</button> :
           ''
         }
       </section>

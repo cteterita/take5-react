@@ -24,7 +24,6 @@ function formatPrompts(prompts, complete) {
 }
 
 function JournalEntry(props) {
-  console.log('rendering ', props.type);
   const handleSubmit = (e) => {
     e.preventDefault();
     const promptFields = e.target.querySelectorAll('fieldset');
@@ -38,9 +37,9 @@ function JournalEntry(props) {
         promptId: Number(p.id),
         responses: responses,
       });
-      props.saveEntry(props.type, newPrompts);
-      e.target.reset();
     });
+    props.saveEntry(props.type, newPrompts);
+    e.target.reset();
   }
 
   if (!props.entryData) {
