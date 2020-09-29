@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import DatePicker from 'react-datepicker';
 import { format, zonedTimeToUtc } from 'date-fns-tz';
+import addDays from 'date-fns/addDays';
 
 import JournalEntry from '../JournalEntry/JournalEntry';
 import STORE from '../store';
@@ -65,13 +66,16 @@ function DayView(props) {
     setEntriesComplete(0);
   };
 
-  // TODO: Wire up previous/next buttons
+  const incrementDay = (n) => {
+    updateDate(addDays(longDate, n));
+  }
+
   return (
     <>
       <section id="date-picker">
-        <button type="submit">&larr;</button>
+        <button type="submit" onClick={() => incrementDay(-1)}>&larr;</button>
         <DatePicker selected={longDate} onChange={(d) => updateDate(d)} />
-        <button type="button">&rarr;</button>
+        <button type="submit" onClick={() => incrementDay(1)}>&rarr;</button>
       </section>
       <section id="daily-entry">
         <JournalEntry entryData={journalData.morning} type="morning" saveEntry={saveEntry} />
