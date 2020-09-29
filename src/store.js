@@ -5,6 +5,7 @@ const STORE = {
       prompts: [
         {
           prompt: `3 things I'm grateful for...`,
+          promptId: 1,
           responses: [
             'cats',
             'warm weather',
@@ -13,6 +14,7 @@ const STORE = {
         },
         {
           prompt: `3 things that will make today great...`,
+          promptId: 2,
           responses: [
             'take5',
             'talking to Mom and Dad on the phone',
@@ -21,6 +23,7 @@ const STORE = {
         },
         {
           prompt: `My intention for today is...`,
+          promptId: 3,
           responses: [
             'focus',
           ],
@@ -32,6 +35,7 @@ const STORE = {
       prompts: [
         {
           prompt: `3 great things that happened today were...`,
+          promptId: 4,
           responses: [
             null,
             null,
@@ -40,12 +44,14 @@ const STORE = {
         },
         {
           prompt: `One thing I let go of today was...`,
+          promptId: 5,
           responses: [
             null,
           ],
         },
         {
           prompt: `I am excited about tomorrow because...`,
+          promptId: 6,
           responses: [
             null,
           ],
@@ -59,6 +65,7 @@ const STORE = {
       prompts: [
         {
           prompt: `3 things I'm grateful for...`,
+          promptId: 1,
           responses: [
             'cats',
             'warm weather',
@@ -67,6 +74,7 @@ const STORE = {
         },
         {
           prompt: `3 things that will make today great...`,
+          promptId: 2,
           responses: [
             'take5',
             'talking to Mom and Dad on the phone',
@@ -75,6 +83,7 @@ const STORE = {
         },
         {
           prompt: `My intention for today is...`,
+          promptId: 3,
           responses: [
             'focus',
           ],
@@ -86,6 +95,7 @@ const STORE = {
       prompts: [
         {
           prompt: `3 great things that happened today were...`,
+          promptId: 4,
           responses: [
             'I met a talking dog',
             'I ate a really great pear',
@@ -94,12 +104,14 @@ const STORE = {
         },
         {
           prompt: `One thing I let go of today was...`,
+          promptId: 5,
           responses: [
             'Obsessively tracking my Amazon packages',
           ],
         },
         {
           prompt: `I am excited about tomorrow because...`,
+          promptId: 6,
           responses: [
             'I get to see that talking dog again',
           ],
@@ -113,6 +125,7 @@ const STORE = {
       prompts: [
         {
           prompt: `3 things I'm grateful for...`,
+          promptId: 1,
           responses: [
             null,
             null,
@@ -121,6 +134,7 @@ const STORE = {
         },
         {
           prompt: `3 things that will make today great...`,
+          promptId: 2,
           responses: [
             null,
             null,
@@ -129,6 +143,7 @@ const STORE = {
         },
         {
           prompt: `My intention for today is...`,
+          promptId: 3,
           responses: [
             null,
           ],
@@ -140,6 +155,7 @@ const STORE = {
       prompts: [
         {
           prompt: `3 great things that happened today were...`,
+          promptId: 4,
           responses: [
             null,
             null,
@@ -148,12 +164,14 @@ const STORE = {
         },
         {
           prompt: `One thing I let go of today was...`,
+          promptId: 5,
           responses: [
             null,
           ],
         },
         {
           prompt: `I am excited about tomorrow because...`,
+          promptId: 6,
           responses: [
             null,
           ],
