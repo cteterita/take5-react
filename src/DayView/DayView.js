@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import DatePicker from 'react-datepicker';
 import { format, zonedTimeToUtc } from 'date-fns-tz';
 import addDays from 'date-fns/addDays';
 
+import AuthContext from '../AuthContext';
 import JournalEntry from '../JournalEntry/JournalEntry';
 import STORE from '../store';
 
@@ -22,6 +23,7 @@ function DayView(props) {
   }
   const routeDate = zonedTimeToUtc(date);
 
+  const auth = useContext(AuthContext);
   const [shortDate, setShortDate] = useState(formatDate(routeDate));
   const [longDate, setLongDate] = useState(routeDate);
   const [journalData, setJournalData] = useState({});
@@ -36,8 +38,12 @@ function DayView(props) {
 
   // Fetch this day's journal entries
   useEffect(() => {
+    if (auth.currentUser) {
+      auth.currentUser.getIdToken(true)
+        .then((token) => { console.log(token); });
+    }
     setJournalData(STORE[shortDate] || STORE.blank);
-  }, [shortDate]);
+  }, [shortDate, auth.currentUser]);
 
   // Determine if either of today's entries have already been saved
   useEffect(() => {
