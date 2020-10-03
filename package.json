@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.2.1",
     "date-fns": "^2.16.1",
     "date-fns-tz": "^1.0.10",
+    "firebase": "^7.22.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-datepicker": "^3.2.2",
