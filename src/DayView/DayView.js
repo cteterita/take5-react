@@ -6,6 +6,7 @@ import addDays from 'date-fns/addDays';
 
 import AuthContext from '../AuthContext';
 import JournalEntry from '../JournalEntry/JournalEntry';
+import config from '../config';
 import STORE from '../store';
 
 import 'react-datepicker/dist/react-datepicker.css';
@@ -40,9 +41,17 @@ function DayView(props) {
   useEffect(() => {
     if (auth.currentUser) {
       auth.currentUser.getIdToken(true)
-        .then((token) => { console.log(token); });
+        .then((token) => {
+          fetch(`${config.SERVER_URL}/entries/${shortDate}`, {
+            headers: {
+              authToken: token,
+            },
+          })
+            .then((res) => res.json())
+            .then((parsedRes) => setJournalData(parsedRes))
+            .catch((e) => console.log(e)); // TODO: implement error handling
+        });
     }
-    setJournalData(STORE[shortDate] || STORE.blank);
   }, [shortDate, auth.currentUser]);
 
   // Determine if either of today's entries have already been saved
