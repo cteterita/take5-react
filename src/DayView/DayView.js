@@ -29,6 +29,7 @@ function DayView(props) {
   const [longDate, setLongDate] = useState(routeDate);
   const [journalData, setJournalData] = useState({});
   const [entriesComplete, setEntriesComplete] = useState(0);
+  const [userAuthToken, setuserAuthToken] = useState(0);
 
   const updateDate = (newDate) => {
     const formattedDate = formatDate(newDate);
@@ -37,22 +38,29 @@ function DayView(props) {
     setShortDate(formattedDate);
   };
 
-  // Fetch this day's journal entries
+  // Set the user's authToken for API requests
   useEffect(() => {
     if (auth.currentUser) {
       auth.currentUser.getIdToken(true)
-        .then((token) => {
-          fetch(`${config.SERVER_URL}/entries/${shortDate}`, {
-            headers: {
-              authToken: token,
-            },
-          })
-            .then((res) => res.json())
-            .then((parsedRes) => setJournalData(parsedRes))
-            .catch((e) => console.log(e)); // TODO: implement error handling
-        });
+        .then((token) => setuserAuthToken(token));
+    } else {
+      setuserAuthToken(null);
     }
-  }, [shortDate, auth.currentUser]);
+  }, [auth.currentUser]);
+
+  // Fetch this day's journal entries
+  useEffect(() => {
+    if (userAuthToken) {
+      fetch(`${config.SERVER_URL}/entries/${shortDate}`, {
+        headers: {
+          authToken: userAuthToken,
+        },
+      })
+        .then((res) => res.json())
+        .then((parsedRes) => setJournalData(parsedRes))
+        .catch((e) => console.log(e)); // TODO: implement error handling
+    }
+  }, [shortDate, userAuthToken]);
 
   // Determine if either of today's entries have already been saved
   useEffect(() => {
@@ -66,13 +74,30 @@ function DayView(props) {
   }, [journalData]);
 
   const saveEntry = (type, prompts) => {
-    STORE[shortDate] = STORE[shortDate] || { ...STORE.blank };
-    STORE[shortDate][type] = {
-      complete: true,
-      prompts,
-    };
-    setEntriesComplete(entriesComplete + 1);
-    setJournalData(STORE[shortDate]);
+    if (userAuthToken) {
+      const body = {
+        type,
+        prompts,
+      };
+      fetch(`${config.SERVER_URL}/entries/${shortDate}`, {
+        method: 'POST',
+        headers: {
+          authToken: userAuthToken,
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify(body),
+      })
+        .then(() => {
+          const newJournalData = { ...journalData };
+          newJournalData[type] = {
+            prompts,
+            complete: true,
+          };
+          setJournalData(newJournalData);
+          setEntriesComplete(entriesComplete + 1);
+        })
+        .catch((e) => console.log(e)); // TODO: implement error handling
+    }
   };
 
   const deleteDay = () => {
