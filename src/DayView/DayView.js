@@ -7,7 +7,6 @@ import addDays from 'date-fns/addDays';
 import AuthContext from '../AuthContext';
 import JournalEntry from '../JournalEntry/JournalEntry';
 import config from '../config';
-import STORE from '../store';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -24,7 +23,10 @@ function DayView(props) {
   }
   const routeDate = zonedTimeToUtc(date);
 
+  // Access AuthContext
   const auth = useContext(AuthContext);
+
+  // Set up our state vars
   const [shortDate, setShortDate] = useState(formatDate(routeDate));
   const [longDate, setLongDate] = useState(routeDate);
   const [journalData, setJournalData] = useState({});
@@ -58,7 +60,7 @@ function DayView(props) {
       })
         .then((res) => res.json())
         .then((parsedRes) => setJournalData(parsedRes))
-        .catch((e) => console.log(e)); // TODO: implement error handling
+        .catch(); // TODO: implement error handling
     }
   }, [shortDate, userAuthToken]);
 
@@ -96,14 +98,22 @@ function DayView(props) {
           setJournalData(newJournalData);
           setEntriesComplete(entriesComplete + 1);
         })
-        .catch((e) => console.log(e)); // TODO: implement error handling
+        .catch(); // TODO: implement error handling
     }
   };
 
   const deleteDay = () => {
-    STORE[shortDate] = { ...STORE.blank };
-    setJournalData(STORE[shortDate]);
-    setEntriesComplete(0);
+    if (userAuthToken) {
+      fetch(`${config.SERVER_URL}/entries/${shortDate}`, {
+        method: 'delete',
+        headers: {
+          authToken: userAuthToken,
+        },
+      })
+        .then((res) => res.json())
+        .then((parsedRes) => setJournalData(parsedRes))
+        .catch(); // TODO: implement error handling
+    }
   };
 
   const incrementDay = (n) => {
