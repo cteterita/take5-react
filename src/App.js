@@ -16,6 +16,19 @@ function App() {
     auth.signInWithPopup(provider)
       .then(history.push('/today'));
   };
+  const signInAnonymously = () => {
+    auth.signInAnonymously()
+      .then(history.push('/today'));
+  };
+  const upgradeAnonymousAccount = () => {
+    auth.currentUser.linkWithPopup(provider)
+      .then((usercred) => {
+        const { user } = usercred;
+        console.log('Anonymous account successfully upgraded', user); // TODO: user feedback
+      }).catch((error) => {
+        console.log('Error upgrading anonymous account', error);
+      });
+  };
   const signOut = () => {
     auth.signOut()
       .then(history.push('/'));
@@ -30,7 +43,7 @@ function App() {
   const contextValue = {
     currentUser,
     signInWithGoogle,
-    signOut,
+    signInAnonymously,
   };
 
   return (
@@ -39,6 +52,7 @@ function App() {
         <header>
           <h1>Take 5</h1>
           <button type="button" onClick={signOut} hidden={!currentUser}>Log out</button>
+          <button type="button" onClick={upgradeAnonymousAccount} hidden={currentUser && !currentUser.isAnonymous}>Sign in with Google</button>
         </header>
         { /* Routes Here */ }
         <Switch>

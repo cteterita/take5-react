@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
 
 import AuthContext from '../AuthContext';
 
@@ -13,9 +12,9 @@ function LandingView() {
       <button type="submit" onClick={auth.signInWithGoogle}>
         Sign in with Google
       </button>
-      <Link to="/today">
-        <button type="submit">View Demo</button>
-      </Link>
+      <button type="submit" onClick={auth.signInAnonymously}>
+        Try it Anonymously
+      </button>
     </section>
   );
 }
