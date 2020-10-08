@@ -49,7 +49,7 @@ function DayView(props) {
       history.push('/');
       setuserAuthToken(null);
     }
-  }, [auth.currentUser]);
+  }, [auth.currentUser, history]);
 
   // Fetch this day's journal entries
   useEffect(() => {
