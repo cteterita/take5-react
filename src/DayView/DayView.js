@@ -16,7 +16,7 @@ function formatDate(date) {
 
 function DayView(props) {
   // Determine date from route
-  const { match } = props;
+  const { match, history } = props;
   let { date } = match.params; // TODO: Deal with invalid dates
   if (!date) {
     date = formatDate(Date.now());
@@ -35,7 +35,7 @@ function DayView(props) {
 
   const updateDate = (newDate) => {
     const formattedDate = formatDate(newDate);
-    props.history.push(`/${formattedDate}`);
+    history.push(`/${formattedDate}`);
     setLongDate(newDate);
     setShortDate(formattedDate);
   };
@@ -46,6 +46,7 @@ function DayView(props) {
       auth.currentUser.getIdToken(true)
         .then((token) => setuserAuthToken(token));
     } else {
+      history.push('/');
       setuserAuthToken(null);
     }
   }, [auth.currentUser]);

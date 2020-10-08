@@ -15,11 +15,19 @@ function App() {
   const provider = new firebase.auth.GoogleAuthProvider();
   const signInWithGoogle = () => {
     auth.signInWithPopup(provider)
-      .then(history.push('/today'));
+      .then((updatedUserAuth) => {
+        // sets currentUser manually; onAuthStateChanged is too slow
+        setCurrentUser(updatedUserAuth.user);
+        history.push('/today');
+      });
   };
   const signInAnonymously = () => {
+    alert('You can try the app and save entries for the duration of your session. If you decide to save them for later, you can upgrade your account by signing into Google later.');
     auth.signInAnonymously()
-      .then(history.push('/today'));
+      .then((updatedUserAuth) => {
+        setCurrentUser(updatedUserAuth.user);
+        history.push('/today');
+      });
   };
   const upgradeAnonymousAccount = () => {
     auth.currentUser.linkWithPopup(provider)
