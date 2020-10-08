@@ -10,6 +10,7 @@ header, footer {
     margin: 10px;
     padding: 10px;
     background-color: #dddddd;
+    position: relative;
 }
 
 #daily-entry, #date-picker {

@@ -5,6 +5,7 @@ import firebase from './firebase';
 import AuthContext from './AuthContext';
 import DayView from './DayView/DayView';
 import LandingView from './LandingView/LandingView';
+import UserInfo from './UserInfo/UserInfo';
 
 function App() {
   const [currentUser, setCurrentUser] = useState();
@@ -44,6 +45,8 @@ function App() {
     currentUser,
     signInWithGoogle,
     signInAnonymously,
+    signOut,
+    upgradeAnonymousAccount,
   };
 
   return (
@@ -51,8 +54,7 @@ function App() {
       <main className="App">
         <header>
           <h1>Take 5</h1>
-          <button type="button" onClick={signOut} hidden={!currentUser}>Log out</button>
-          <button type="button" onClick={upgradeAnonymousAccount} hidden={currentUser && !currentUser.isAnonymous}>Sign in with Google</button>
+          <UserInfo />
         </header>
         { /* Routes Here */ }
         <Switch>
