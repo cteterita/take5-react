@@ -46,7 +46,6 @@ function DayView(props) {
       auth.currentUser.getIdToken(true)
         .then((token) => setuserAuthToken(token));
     } else {
-      history.push('/');
       setuserAuthToken(null);
     }
   }, [auth.currentUser, history]);

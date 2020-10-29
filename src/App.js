@@ -46,6 +46,10 @@ function App() {
   useEffect(() => {
     auth.onAuthStateChanged((updatedUserAuth) => {
       setCurrentUser(updatedUserAuth);
+      // If no user is logged in, redirect them to the home page to login
+      if (!updatedUserAuth) {
+        history.push('/');
+      }
     });
   });
 
