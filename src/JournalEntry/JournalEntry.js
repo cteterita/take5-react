@@ -1,8 +1,22 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-function formatPrompts(prompts, complete) {
-  return prompts.map((p) => {
+function JournalEntry(props) {
+  const { type, saveEntry, entryData } = props;
+  const [currentEntry, setCurrentEntry] = useState(entryData);
+
+  useEffect(() => {
+    setCurrentEntry(entryData);
+  }, [entryData]);
+
+  const updateValue = (e) => {
+    const [promptId, responseId] = e.currentTarget.id.split('-');
+    const updatedEntry = { ...currentEntry };
+    currentEntry.prompts[promptId - 1].responses[responseId] = e.currentTarget.value;
+    setCurrentEntry(updatedEntry);
+  };
+
+  const formatPrompts = (prompts, complete) => prompts.map((p) => {
     const { promptId, prompt, responses } = p;
     return (
       <fieldset
@@ -12,22 +26,20 @@ function formatPrompts(prompts, complete) {
       >
         {prompt}
         {responses.map((r, i) => {
-          const id = `${i}-${p.promptId}`;
+          const id = `${p.promptId}-${i}`;
           return (
             <input
               key={id}
               id={id}
-              defaultValue={r}
+              value={r}
+              onChange={(e) => updateValue(e)}
             />
           );
         })}
       </fieldset>
     );
   });
-}
 
-function JournalEntry(props) {
-  const { type, saveEntry, entryData } = props;
   const handleSubmit = (e) => {
     e.preventDefault();
     const promptFields = e.target.querySelectorAll('fieldset');
@@ -46,14 +58,15 @@ function JournalEntry(props) {
     e.target.reset();
   };
 
-  if (!entryData) {
+  if (!currentEntry) {
     return <span>Loading...</span>;
   }
+
   return (
     <form id={`${type}-form`} onSubmit={handleSubmit}>
       <h3>{type === 'morning' ? 'Morning Intentions' : 'Evening Reflections' }</h3>
-      {formatPrompts(entryData.prompts, entryData.complete)}
-      <button type="submit" disabled={entryData.complete}>Save</button>
+      {formatPrompts(currentEntry.prompts, currentEntry.complete)}
+      <button type="submit" disabled={currentEntry.complete}>Save</button>
     </form>
   );
 }
