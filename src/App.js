@@ -75,11 +75,8 @@ function App() {
           <Route path="/" component={LandingView} />
         </Switch>
         <footer>
-          (c) 2020 Claire Teter Lesh
-          <br />
-          <a href="https://github.com/cteterita/take5-react" target="_blank" rel="noopener noreferrer">Github</a>
-          <br />
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLScz_YgbHT38M95Zn3xu1AhHGNT93GXElDGiFQ2Qsehi3r0ygA/viewform?usp=sf_link" target="_blank" rel="noopener noreferrer">Feedback</a>
+          Copyright 2020,&nbsp;
+          <a href="https://github.com/cteterita/take5-react" target="_blank" rel="noopener noreferrer">Claire Teter Lesh</a>
         </footer>
       </main>
     </AuthContext.Provider>

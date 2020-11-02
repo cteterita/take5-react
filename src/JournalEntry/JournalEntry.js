@@ -48,14 +48,21 @@ function JournalEntry(props) {
   };
 
   if (!currentEntry) {
-    return <span>Loading...</span>;
+    return (
+      <form id={`${type}-form`} onSubmit={handleSubmit}>
+        <h3>{type === 'morning' ? 'Morning Intentions' : 'Evening Reflections' }</h3>
+        <span>Loading...</span>
+      </form>
+    );
   }
 
   return (
     <form id={`${type}-form`} onSubmit={handleSubmit}>
       <h3>{type === 'morning' ? 'Morning Intentions' : 'Evening Reflections' }</h3>
       {formatPrompts(currentEntry.prompts, currentEntry.complete)}
-      <button type="submit" disabled={currentEntry.complete}>Save</button>
+      <fieldset>
+        <button type="submit" disabled={currentEntry.complete}>Save</button>
+      </fieldset>
     </form>
   );
 }

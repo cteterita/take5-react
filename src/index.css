@@ -1,17 +1,51 @@
+/* FONTS */
+@import url('https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Open+Sans&display=swap');
+
+/* COLOR PALLETTE */
+/* https://coolors.co/0a3200-221d23-b36a5e-f1edee */
+:root {
+  --forest-green: #0a3200ff;
+  --raisin-black: #221d23ff;
+  --copper-penny: #b36a5eff;
+  --isabelline: #f1edeeff;
+}
+
+/* Primary Containers */
+
 body {
     width: 90%;
-    max-width: 800px;
+    max-width: 1000px;
     margin: auto;
-    background-color: #aaaaaa;
+    color: var(--raisin-black);
+    background-color: var(--forest-green);
+    font-family: 'Open Sans', sans-serif;
 }
 
 header, footer {
     text-align: center;
     margin: 10px;
-    padding: 10px;
-    background-color: #dddddd;
     position: relative;
+    color: var(--isabelline);
 }
+
+/* Elements */
+
+h1 {
+  font-family: 'Cedarville Cursive', cursive;
+  font-size: 3em;
+  margin: 0;
+}
+
+h3 {
+    font-family: 'Cedarville Cursive', cursive;
+    font-size: 2em;
+    padding: 0px 10px;
+}
+
+a:link { color: var(--copper-penny); }
+a:visited{ color: var(--copper-penny); }
+a:hover { color: var(--copper-penny); }
+a:active { color: var(--isabelline); }
 
 #daily-entry, #date-picker {
     margin: auto;
@@ -20,7 +54,8 @@ header, footer {
     padding: 10px;
     font-size: 16px;
     line-height: 20px;
-    background-color: #ffffff;
+    border-radius: 10px;
+    background-color: var(--isabelline);
 }
 
 #date-picker {
@@ -28,15 +63,35 @@ header, footer {
 }
 
 /* Form Styles */
+form {
+  flex: 1;
+}
+
 fieldset {
   display: flex;
   flex-direction: column;
+  border: none;
 }
 
 input {
   width: 95%;
 }
 
+button, input {
+  font-family: 'Open Sans', sans-serif;
+  margin: 5px 0px;
+}
+
 .delete-button {
-  color: red;
+  color: var(--copper-penny);
+  float: right;
+}
+
+/* Layout for Desktop */
+
+@media all and (min-width: 1000px) {
+  #daily-entry-holder {
+    display: flex;
+    flex-direction: row;
+  }
 }

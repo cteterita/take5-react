@@ -128,10 +128,11 @@ function DayView(props) {
         <button type="submit" onClick={() => incrementDay(1)}>&rarr;</button>
       </section>
       <section id="daily-entry">
-        <JournalEntry entryData={journalData.morning} type="morning" saveEntry={saveEntry} />
-        <hr />
-        <JournalEntry entryData={journalData.evening} type="evening" saveEntry={saveEntry} />
-        <hr />
+        <div id="daily-entry-holder">
+          <JournalEntry entryData={journalData.morning} type="morning" saveEntry={saveEntry} />
+          <hr />
+          <JournalEntry entryData={journalData.evening} type="evening" saveEntry={saveEntry} />
+        </div>
         {
           entriesComplete
             ? <button type="submit" className="delete-button" onClick={deleteDay}>Delete all entries from this day</button>
