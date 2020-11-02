@@ -12,7 +12,9 @@ function JournalEntry(props) {
   const updateValue = (e) => {
     const [promptId, responseId] = e.currentTarget.id.split('-');
     const updatedEntry = { ...currentEntry };
-    currentEntry.prompts[promptId - 1].responses[responseId] = e.currentTarget.value;
+    const promptIndex = updatedEntry.prompts.findIndex((p) => p.promptId === Number(promptId));
+    console.log(promptIndex);
+    updatedEntry.prompts[promptIndex].responses[responseId] = e.currentTarget.value;
     setCurrentEntry(updatedEntry);
   };
 
