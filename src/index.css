@@ -58,7 +58,7 @@ a:active { color: var(--isabelline); }
     background-color: var(--isabelline);
 }
 
-#date-picker {
+#date-picker, #sign-in-holder {
   text-align: center;
 }
 
