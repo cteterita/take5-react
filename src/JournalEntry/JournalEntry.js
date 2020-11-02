@@ -42,20 +42,7 @@ function JournalEntry(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const promptFields = e.target.querySelectorAll('fieldset');
-    const newPrompts = [];
-    promptFields.forEach((p) => {
-      const responseFields = p.querySelectorAll('input');
-      const responses = [];
-      responseFields.forEach((r) => responses.push(r.value));
-      newPrompts.push({
-        prompt: p.innerText,
-        promptId: Number(p.id),
-        responses,
-      });
-    });
-    saveEntry(type, newPrompts);
-    e.target.reset();
+    saveEntry(type, currentEntry.prompts);
   };
 
   if (!currentEntry) {
