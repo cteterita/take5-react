@@ -75,6 +75,19 @@ function DayView(props) {
     }
   }, [journalData]);
 
+  // Update the user feedback to show if entry saved successfully
+  const displaySuccessMessage = (type, successful) => {
+    const message = successful ? 'Saved successfully!' : 'Error saving. Please try again.';
+    const feedbackDiv = document.getElementsByClassName(`${type} user-feedback`)[0];
+    feedbackDiv.removeAttribute('hidden');
+    feedbackDiv.innerHTML = message;
+    if (!successful) {
+      feedbackDiv.classList.add('error');
+    } else {
+      feedbackDiv.classList.remove('error');
+    }
+  };
+
   const saveEntry = (type, prompts) => {
     if (userAuthToken) {
       const body = {
@@ -97,8 +110,9 @@ function DayView(props) {
           };
           setJournalData(newJournalData);
           setEntriesComplete(entriesComplete + 1);
+          displaySuccessMessage(type, true);
         })
-        .catch(); // TODO: implement error handling
+        .catch(() => displaySuccessMessage(type, false));
     }
   };
 
@@ -111,8 +125,7 @@ function DayView(props) {
         },
       })
         .then((res) => res.json())
-        .then((parsedRes) => setJournalData(parsedRes))
-        .catch(); // TODO: implement error handling
+        .then((parsedRes) => setJournalData(parsedRes));
     }
   };
 

@@ -13,7 +13,6 @@ function JournalEntry(props) {
     const [promptId, responseId] = e.currentTarget.id.split('-');
     const updatedEntry = { ...currentEntry };
     const promptIndex = updatedEntry.prompts.findIndex((p) => p.promptId === Number(promptId));
-    console.log(promptIndex);
     updatedEntry.prompts[promptIndex].responses[responseId] = e.currentTarget.value;
     setCurrentEntry(updatedEntry);
   };
@@ -61,7 +60,8 @@ function JournalEntry(props) {
       <h3>{type === 'morning' ? 'Morning Intentions' : 'Evening Reflections' }</h3>
       {formatPrompts(currentEntry.prompts, currentEntry.complete)}
       <fieldset>
-        <button type="submit" disabled={currentEntry.complete}>Save</button>
+        <button type="submit" hidden={currentEntry.complete}>Save</button>
+        <div className={`${type} user-feedback`} hidden />
       </fieldset>
     </form>
   );
