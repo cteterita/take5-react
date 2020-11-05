@@ -5,7 +5,7 @@ import './UserInfo.css';
 function UserInfo() {
   const auth = useContext(AuthContext);
   if (!auth.currentUser) {
-    return null;
+    return <div className="user-info-holder" />;
   }
   return (
     <div className="user-info-holder">
