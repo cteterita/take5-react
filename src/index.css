@@ -28,6 +28,12 @@ header, footer {
     color: var(--isabelline);
 }
 
+header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 /* Elements */
 
 h1 {
@@ -100,9 +106,14 @@ button, input {
 
 /* Layout for Desktop */
 
-@media all and (min-width: 1000px) {
+@media all and (min-width: 800px) {
   #daily-entry-holder {
     display: flex;
     flex-direction: row;
+  }
+
+  header {
+    flex-direction: row;
+    justify-content: space-between;
   }
 }

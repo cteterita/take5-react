@@ -65,6 +65,7 @@ function App() {
     <AuthContext.Provider value={contextValue}>
       <main className="App">
         <header>
+          <div className="user-info-holder" />
           <h1>Take 5</h1>
           <UserInfo />
         </header>
