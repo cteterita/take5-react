@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App component renders as expected 1`] = `
+<main
+  className="App"
+>
+  <header>
+    <div
+      className="user-info-holder"
+    />
+    <h1>
+      Take 5
+    </h1>
+    <div
+      className="user-info-holder"
+    />
+  </header>
+  <section
+    id="daily-entry"
+  >
+    <h3>
+      Take 5 minutes each day for yourself
+    </h3>
+    <p>
+      Take the first 2.5 minutes after waking up to set your intentions for the day.
+    </p>
+    <p>
+      Return in the evening for 2.5 minutes to review your day and practice gratitude.
+    </p>
+    <div
+      id="sign-in-holder"
+    >
+      <button
+        onClick={[Function]}
+        type="submit"
+      >
+        Sign in with Google
+      </button>
+       or 
+      <button
+        onClick={[Function]}
+        type="submit"
+      >
+        Try it Anonymously
+      </button>
+    </div>
+  </section>
+  <footer>
+    Copyright 2020, 
+    <a
+      href="https://github.com/cteterita/take5-react"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      Claire Teter Lesh
+    </a>
+  </footer>
+</main>
+`;
