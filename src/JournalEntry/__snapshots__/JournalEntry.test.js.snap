@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`JournalEntry component renders as expected 1`] = `
+<form
+  id="morning-form"
+  onSubmit={[Function]}
+>
+  <h3>
+    Morning Intentions
+  </h3>
+  <fieldset
+    disabled={true}
+    id={1}
+  >
+    Example prompt!
+    <input
+      id="1-0"
+      onChange={[Function]}
+      value="Example response 1"
+    />
+    <input
+      id="1-1"
+      onChange={[Function]}
+      value="Example response 2"
+    />
+  </fieldset>
+  <fieldset>
+    <button
+      hidden={true}
+      type="submit"
+    >
+      Save
+    </button>
+    <div
+      className="morning user-feedback"
+      hidden={true}
+    />
+  </fieldset>
+</form>
+`;
