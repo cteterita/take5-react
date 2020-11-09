@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LandingView component renders as expected while logged in anonymously 1`] = `
+<div
+  className="user-info-holder"
+>
+  <span>
+    Logged in as:
+    <br />
+    Anonymous
+  </span>
+  <button
+    onClick={[Function]}
+    type="button"
+  >
+    Log out
+  </button>
+  <button
+    hidden={true}
+    onClick={[Function]}
+    type="button"
+  >
+    Sign in with Google
+  </button>
+</div>
+`;
+
+exports[`LandingView component renders as expected while logged in using Google 1`] = `
+<div
+  className="user-info-holder"
+>
+  <span>
+    Logged in as:
+    <br />
+    example@user.com
+  </span>
+  <button
+    onClick={[Function]}
+    type="button"
+  >
+    Log out
+  </button>
+  <button
+    hidden={true}
+    onClick={[Function]}
+    type="button"
+  >
+    Sign in with Google
+  </button>
+</div>
+`;
+
+exports[`LandingView component renders as expected while logged out 1`] = `
+<div
+  className="user-info-holder"
+/>
+`;
