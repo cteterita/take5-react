@@ -31,11 +31,11 @@ function App() {
   };
   const upgradeAnonymousAccount = () => {
     auth.currentUser.linkWithPopup(provider)
-      .then((usercred) => {
-        const { user } = usercred;
-        console.log('Anonymous account successfully upgraded', user); // TODO: user feedback
+      .then((updatedUserAuth) => {
+        setCurrentUser(updatedUserAuth.user);
+        alert('Anonymous account successfully upgraded!');
       }).catch((error) => {
-        console.log('Error upgrading anonymous account', error);
+        alert('There was an error upgrading your account. Perhaps you have already created an account with this google account?');
       });
   };
   const signOut = () => {
